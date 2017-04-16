@@ -4,9 +4,20 @@ $base-font-family: sans-serif;
 $black: #0e0e0e;
 $white: #ccc;
 $font: #3e2a5d;
-$pink: #ec4e7a;
-$teal: #32e58f;
-$orange: #ebac00;
+$pink: linear-gradient(45deg, #ec4e7a, rgb(19, 42, 143));
+$teal: linear-gradient(to bottom right, #32e58f, rgb(20, 190, 158));
+$orange: linear-gradient(to bottom, #ebac00, rgb(208, 112, 24));
+$green: linear-gradient(to right, rgba(49, 143, 44, 0.4), rgba(20, 136, 31, 0.4));
+
+@mixin popups {
+  position: fixed;
+  display: none;
+  border-radius: 15px;
+  left: 200px;
+  z-index: 2;
+  padding: 20px;
+  background: $teal;
+}
 
 html {
   @include full-height;
@@ -18,91 +29,236 @@ body {
   color: $font;
   background-color: $white;
   border-radius: 15px;
+  background-image: $pink;
 }
 
 .everything {
   display: flex;
   flex-direction: row;
-  // justify-content: space-between;
+  z-index: -2;
 }
 
 .sidebar {
-  background-color: $orange;
+  z-index: 1;
+  background: $orange;
   text-align: left;
   width: 180px;
+  height: 1000px;
 
-  > p {
+  .name {
+    margin-top: 35px;
+    font-size: 1.5em;
+  }
+
+  p {
     color: red;
-    font-size: 1.2em;
     margin: 5px 0 1px 25px;
   }
 
-  .useful {
+  .linkList {
+    list-style: none;
     position: fixed;
-    top: 25px;
+    top: 230px;
+    font-size: 1.1em;
   }
 
-  .links {
-    position: fixed;
-    top: 55px;
+  .modal {
+    display: none;
   }
 
   .linkList li {
     padding: 5px 10px;
     border-radius: 15px;
-    background: linear-gradient(to right, $teal 50%, $orange 50%);
-    background-size: 202% 100%;
+    background: linear-gradient(to right, #32e58f 50%, transparent 50%);
+    background-size: 200% 100%;
     background-position: right;
+    margin: 10px 0;
 
     &:hover {
       background-position: left;
       transition: background-position 300ms ease;
+
+      .modal {
+        display: block;
+        z-index: 2;
+        position: fixed;
+        top: 0;
+        left: 180px;
+        right: 0;
+        bottom: 0;
+        opacity: 0.75;
+        background-color: $black;
+      }
     }
   }
 
-  .popUpAboutMe {
-    background-color: $teal;
-    position: fixed;
-    top: 140px;
-    left: 150px;
-    display: none;
-    border-radius: 15px;
+  .sidebarLink:link,
+  .sidebarLink:focus,
+  .sidebarLink:hover,
+  .sidebarLink:active {
+    text-decoration: none;
+    color: $font;
   }
 
-  .visible {
+  .sidebarLink:active {
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .linkList .sidebar1:hover .popupAboutMe {
     display: block;
+    z-index: 3;
   }
-}
 
-.linkList {
-  list-style: none;
-  position: fixed;
-  top: 120px;
+  .linkList .sidebar2:hover .popupProjects {
+    display: block;
+    z-index: 3;
+  }
+
+  .linkList .sidebar3:hover .popupTIY {
+    display: block;
+    z-index: 3;
+  }
+
+  .popupAboutMe {
+    @include popups;
+
+    top: 250px;
+  }
+
+  .popupProjects {
+    @include popups;
+
+    top: 285px;
+  }
+
+  .popupTIY {
+    @include popups;
+
+    top: 325px;
+  }
 }
 
 .main {
-  background-color: rgb(75, 146, 194);
+  z-index: 0;
   display: flex;
   flex-direction: column;
-  width: 560px;
-}
+  flex: 1;
 
-.info {
-  display: flex;
-  justify-content: space-around;
-  background-color: yellow;
-}
+  .info {
+    display: flex;
+    justify-content: space-around;
 
-#profile {
-  width: 300px;
-  height: 300px;
-}
+    #profile {
+      width: 320px;
+      height: 300px;
+      border-radius: 15px;
+      margin: 100px 80px;
 
-.aboutMe {
-  background-color: pink;
+      &:hover {
+        border: 2px solid transparent;
+      }
+    }
+
+    .infoBox {
+      background-color: #cdcdcd;
+      opacity: 0.5;
+      padding: 0 1em;
+      align-self: flex-start;
+      border-radius: 15px;
+      position: relative;
+      color: $black;
+      margin: 80px 10px;
+      z-index: 5;
+      font-size: 1.7em;
+
+      &:hover {
+        border: 2px solid transparent;
+      }
+
+      #talkArrow {
+        width: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        border-left: 0 solid transparent;
+        border-right: 30px solid transparent;
+        border-radius: 0;
+        border-top: 20px solid #cdcdcd;
+        position: absolute;
+        bottom: -12px;
+      }
+    }
+  }
+
+  .aboutMe {
+    background-image: $green;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+
+    .appGit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .appImage {
+        border-radius: 15px;
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+      }
+
+      .appImage:focus,
+      .appImage:hover,
+      .appImage:active {
+        border: 4px solid orange;
+        border-radius: 15px;
+      }
+
+      .gitLink {
+        border-radius: 5px;
+        background-color: #0f6aca;
+        color: rgb(240, 231, 234);
+        text-align: center;
+        width: 88px;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        padding: 4px 6px;
+        margin-bottom: 10px;
+
+        &:hover {
+          background-color: rgb(196, 133, 58);
+        }
+
+        a:link,
+        a:visited {
+          color: rgb(240, 231, 234);
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }
 
 footer {
-  background-color: green;
-  height: 700px;
+  // height: 200px;
+
+  .logos {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3em;
+    margin-bottom: 5em;
+  }
+
+  .logoLink {
+    color: white;
+    opacity: 0.88;
+
+    &:hover {
+      color: rgb(25, 152, 193);
+    }
+  }
 }

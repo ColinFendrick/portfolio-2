@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-class PopUpAboutMe extends Component {
+class PopupAboutMe extends Component {
   render () {
-    return <div className='popUpAboutMe'>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    return <div className='popupAboutMe'>
+      My name is Colin Fendrick. I'm a Javascript developer at The Iron Yard. I'm currently learning more about the landscape and looking for work upon completion of school. Check out my github links below to see some of my work.
     </div>
   }
 }
 
-export default PopUpAboutMe
+export default PopupAboutMe
