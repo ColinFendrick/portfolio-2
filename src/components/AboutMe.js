@@ -4,7 +4,7 @@ class AboutMe extends Component {
   render () {
     return <div className='aboutMe'>
       <div className='oneList appGit'>
-        <a href='http://snowman.colinfendrick.surge.sh/'><img className='appImage' src='one-list.png' alt='one list' title='One List' /></a>
+        <a href='http://one-list.colinfendrick.surge.sh/'><img className='appImage' src='one-list.png' alt='one list' title='One List' /></a>
         <div className='gitLink'><a href='https://github.com/ColinFendrick/one-list-two-list'>Git link</a></div>
       </div>
       <div className='roshambo appGit'>
